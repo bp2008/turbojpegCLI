@@ -126,6 +126,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="LICENSES.TXT">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="testimg.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
