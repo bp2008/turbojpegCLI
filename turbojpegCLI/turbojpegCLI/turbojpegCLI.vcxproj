@@ -37,7 +37,9 @@
     <ResourceCompile Include="turbojpegCLI.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="LICENSES.TXT" />
+    <Text Include="LICENSES.TXT">
+      <DeploymentContent>true</DeploymentContent>
+    </Text>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{53B9B82C-FA36-4AAA-A20A-4C10EC72DBED}</ProjectGuid>
