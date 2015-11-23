@@ -8,11 +8,11 @@ namespace turbojpegCLI
 		/// <summary>
 		/// Numerator
 		/// </summary>
-		int num = 1;
+		int num;
 		/// <summary>
 		/// Denominator
 		/// </summary>
-		int denom = 1;
+		int denom;
 	public:
 		TJScalingFactor(int num, int denom)
 		{

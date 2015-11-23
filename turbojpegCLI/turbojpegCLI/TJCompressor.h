@@ -2,7 +2,6 @@
 #pragma warning( disable : 4635 )
 #include "turbojpeg.h"
 #pragma warning( default : 4635 )
-#include "TJException.h"
 #include "TJ.h"
 using namespace System;
 namespace turbojpegCLI
@@ -13,21 +12,37 @@ namespace turbojpegCLI
 	public ref class TJCompressor
 	{
 	private:
-		String^ NO_ASSOC_ERROR = "No source image is associated with this instance";
+		String^ NO_ASSOC_ERROR;
 		tjhandle handle;
 		array<Byte>^ srcBuf;
-		int srcWidth = 0;
-		int srcHeight = 0;
-		int srcX = -1;
-		int srcY = -1;
-		int srcPitch = 0;
-		int srcStride = 0;
-		PixelFormat srcPixelFormat = (PixelFormat)-1;
-		SubsamplingOption subsamp = SubsamplingOption::SAMP_420;
-		int jpegQuality = 80;
-		int compressedSize = 0;
-		bool isDisposed = false;
+		int srcWidth;
+		int srcHeight;
+		int srcX;
+		int srcY;
+		int srcPitch;
+		int srcStride;
+		PixelFormat srcPixelFormat;
+		SubsamplingOption subsamp;
+		int jpegQuality;
+		int compressedSize;
+		bool isDisposed;
 		!TJCompressor();
+		void Initialize()
+		{
+			NO_ASSOC_ERROR = "No source image is associated with this instance";
+			handle = 0;
+			srcWidth = 0;
+			srcHeight = 0;
+			srcX = -1;
+			srcY = -1;
+			srcPitch = 0;
+			srcStride = 0;
+			srcPixelFormat = (PixelFormat)-1;
+			subsamp = SubsamplingOption::SAMP_420;
+			jpegQuality = 80;
+			compressedSize = 0;
+			isDisposed = false;
+		}
 
 		void checkSourceImage();
 	public:

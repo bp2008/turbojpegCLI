@@ -2,7 +2,6 @@
 #pragma warning( disable : 4635 )
 #include "turbojpeg.h"
 #pragma warning( default : 4635 )
-#include "TJException.h"
 #include "TJ.h"
 using namespace System;
 namespace turbojpegCLI
@@ -13,16 +12,28 @@ namespace turbojpegCLI
 	public ref class TJDecompressor
 	{
 	private:
-		String^ NO_ASSOC_ERROR = "No JPEG image is associated with this instance";
+		String^ NO_ASSOC_ERROR;
 		tjhandle handle;
 		array<Byte>^ jpegBuf;
-		int jpegBufSize = 0;
-		int jpegWidth = 0;
-		int jpegHeight = 0;
-		SubsamplingOption jpegSubsamp = (SubsamplingOption)-1;
-		Colorspace jpegColorspace = (Colorspace)-1;
-		bool isDisposed = false;
+		int jpegBufSize;
+		int jpegWidth;
+		int jpegHeight;
+		SubsamplingOption jpegSubsamp;
+		Colorspace jpegColorspace;
+		bool isDisposed;
 		!TJDecompressor();
+
+		void Initialize()
+		{
+			NO_ASSOC_ERROR = "No JPEG image is associated with this instance";
+			handle = 0;
+			jpegBufSize = 0;
+			jpegWidth = 0;
+			jpegHeight = 0;
+			jpegSubsamp = (SubsamplingOption)-1;
+			jpegColorspace = (Colorspace)-1;
+			isDisposed = false;
+		}
 	public:
 
 		TJDecompressor();
