@@ -1,4 +1,5 @@
 #include "TJDecompressor.h"
+#include "TJException.h"
 
 namespace turbojpegCLI
 {
@@ -8,6 +9,7 @@ namespace turbojpegCLI
 	/// </summary>
 	TJDecompressor::TJDecompressor()
 	{
+		Initialize();
 		handle = tjInitDecompress();
 		if (handle == nullptr)
 			throw gcnew TJException(getSystemString(tjGetErrorStr()));
@@ -18,6 +20,7 @@ namespace turbojpegCLI
 	/// <param name="jpegImage">A byte array containing compressed jpeg image data.</param>
 	TJDecompressor::TJDecompressor(array<Byte>^ jpegImage)
 	{
+		Initialize();
 		handle = tjInitDecompress();
 		if (handle == nullptr)
 			throw gcnew TJException(getSystemString(tjGetErrorStr()));
@@ -30,6 +33,7 @@ namespace turbojpegCLI
 	/// <param name="imageSize">The length of the image data in the array.</param>
 	TJDecompressor::TJDecompressor(array<Byte>^ jpegImage, int imageSize)
 	{
+		Initialize();
 		handle = tjInitDecompress();
 		if (handle == nullptr)
 			throw gcnew TJException(getSystemString(tjGetErrorStr()));
@@ -53,7 +57,7 @@ namespace turbojpegCLI
 	TJDecompressor::!TJDecompressor()
 	{
 		// This is the Finalizer, for disposing of unmanaged data.  Managed data should not be disposed here, because managed classes may have already been garbage collected by the time this runs.
-		if (tjDestroy(handle) == -1)
+		if (handle != 0 && tjDestroy(handle) == -1)
 			throw gcnew TJException(getSystemString(tjGetErrorStr()));
 		handle = 0;
 	}

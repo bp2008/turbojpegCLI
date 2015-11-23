@@ -1,4 +1,5 @@
 #include "TJCompressor.h"
+#include "TJException.h"
 namespace turbojpegCLI
 {
 	/// <summary>
@@ -8,6 +9,7 @@ namespace turbojpegCLI
 	/// </summary>
 	TJCompressor::TJCompressor()
 	{
+		Initialize();
 	}
 
 	/// <summary>
@@ -27,7 +29,7 @@ namespace turbojpegCLI
 	TJCompressor::!TJCompressor()
 	{
 		// This is the Finalizer, for disposing of unmanaged data.  Managed data should not be disposed here, because managed classes may have already been garbage collected by the time this runs.
-		if (tjDestroy(handle) == -1)
+		if (handle != 0 && tjDestroy(handle) == -1)
 			throw gcnew TJException(getSystemString(tjGetErrorStr()));
 		handle = 0;
 	}
@@ -51,6 +53,7 @@ namespace turbojpegCLI
 	/// which the JPEG or YUV image should be compressed/encoded</param>
 	TJCompressor::TJCompressor(array<Byte>^ srcImage, int width, int height)
 	{
+		Initialize();
 		setSourceImage(srcImage, width, height);
 	}
 
@@ -75,6 +78,7 @@ namespace turbojpegCLI
 	/// <param name="pixelFormat">pixel format of the source image (one of the PixelFormat enum values)</param>
 	TJCompressor::TJCompressor(array<Byte>^ srcImage, int width, int height, PixelFormat pixelFormat)
 	{
+		Initialize();
 		setSourceImage(srcImage, width, height, pixelFormat);
 	}
 
@@ -113,6 +117,7 @@ namespace turbojpegCLI
 	/// <param name="pixelFormat">pixel format of the source image (one of the PixelFormat enum values)</param>
 	TJCompressor::TJCompressor(array<Byte>^ srcImage, int x, int y, int width, int pitch, int height, PixelFormat pixelFormat)
 	{
+		Initialize();
 		setSourceImage(srcImage, x, y, width, pitch, height, pixelFormat);
 	}
 
